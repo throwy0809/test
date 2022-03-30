@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cs="clr-namespace:Server.CustomView"
+             xmlns:xfpinview="clr-namespace:XFPINView;assembly=XFPINView"
+             x:Class="Server.Views.VerifyPin">
+    <StackLayout>
+        <StackLayout VerticalOptions="Center" HeightRequest="250">
+            <Image Source="CynthusRedLogo" WidthRequest="200" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+
+        </StackLayout>
+
+        <StackLayout Padding="40" Spacing="20">
+            <Label x:Name="viewText" Text="Enter your PIN" Margin="10" FontSize="Medium" TextColor="#cc0066"/>
+            <xfpinview:PINView x:Name="pinView" BoxFocusColor="White" BoxBorderColor="White" BoxBackgroundColor="#FEDBD0" BoxSize="50" BoxSpacing="20" BoxShape="Circle" PINLength="4" PINValue="{Binding PIN}" Color="#cc0066" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
