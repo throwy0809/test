@@ -2,42 +2,134 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Server.Views.MainPage"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             xmlns:local="clr-namespace:Server.ViewModels"
              xmlns:plugin="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
-             xmlns:controls="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar">
-    <ContentPage.Content>
-        <StackLayout Margin="40">
-            <plugin:Calendar
-                Events="{Binding Events}"
-                MaximumDate="{Binding MaximumDate}"
-                MinimumDate="{Binding MinimumDate}"
-                Month="{Binding Month}"
-                SelectedDate="{Binding SelectedDate}"
-                Year="{Binding Year}"
-                Padding="10,0"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
-                <plugin:Calendar.EventTemplate>
-                    <DataTemplate>
-                        <StackLayout
-                            Padding="15,0,0,0"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
-                            <Label
-                                FontAttributes="Bold"
-                                FontSize="Medium"
-                                Text="{Binding Name}" />
-                            <Label
-                                FontSize="Small"
-                                LineBreakMode="WordWrap"
-                                Text="{Binding Description}" />
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.EventSelectedCommand, Source={x:Reference simpleCalendarPage}}" CommandParameter="{Binding .}" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
-                    </DataTemplate>
-                </plugin:Calendar.EventTemplate>
-            </plugin:Calendar>
-        </StackLayout>
-    </ContentPage.Content>
+             x:Name="MainPageCalendar"
+             Title="Calendar Events">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding TodayCommand}" Text="Today" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.BindingContext>
+        <local:SimplePageViewModel />
+    </ContentPage.BindingContext>
+
+    <plugin:Calendar
+        SwipeToChangeMonthEnabled="false"
+        SwipeUpToHideEnabled="False"
+        Events="{Binding Events}"
+        MaximumDate="{Binding MaximumDate}"
+        MinimumDate="{Binding MinimumDate}"
+        Month="{Binding Month}"
+        SelectedDate="{Binding SelectedDate}"
+        Year="{Binding Year}"
+        Padding="10,0"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <plugin:Calendar.HeaderSectionTemplate>
+            <DataTemplate>
+                <Grid
+                    Margin="0,2"
+                    Padding="0"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding ShowMonthPicker}"
+                    VerticalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Frame
+                        Grid.Column="0"
+                        Padding="0"
+                        BackgroundColor="White"
+                        CornerRadius="18"
+                        HasShadow="False"
+                        HeightRequest="36"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="Center"
+                        WidthRequest="36">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
+                            FontSize="25"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            InputTransparent="True"
+                            Text="&#xf060;"
+                            TextColor="{Binding ArrowsColor}"
+                            VerticalOptions="CenterAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PrevLayoutUnitCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Label
+                        Grid.Column="1"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        HorizontalOptions="Center"
+                        TextColor="{Binding MonthLabelColor}"
+                        VerticalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding LayoutUnitText, Mode=TwoWay}" />
+                                <Span Text=", " />
+                                <Span Text="{Binding Year, Mode=TwoWay}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Frame
+                        Grid.Column="2"
+                        Padding="0"
+                        BackgroundColor="White"
+                        CornerRadius="18"
+                        HasShadow="False"
+                        HeightRequest="36"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
+                            FontSize="25"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            InputTransparent="True"
+                            Text="&#xf061;"
+                            TextColor="{Binding ArrowsColor}"
+                            VerticalOptions="CenterAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NextLayoutUnitCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </Grid>
+            </DataTemplate>
+        </plugin:Calendar.HeaderSectionTemplate>
+        <plugin:Calendar.EventTemplate>
+            <DataTemplate>
+                <StackLayout
+                    Padding="15,0,0,0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Text="{Binding Name}" />
+                    <Label
+                        FontSize="Small"
+                        LineBreakMode="WordWrap"
+                        Text="{Binding str_service}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.EventSelectedCommand, Source={x:Reference MainPageCalendar}}" CommandParameter="{Binding .}" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </DataTemplate>
+        </plugin:Calendar.EventTemplate>
+    </plugin:Calendar>
 </ContentPage>

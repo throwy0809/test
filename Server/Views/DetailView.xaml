@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Server.Views.DetailView"
+             Title="Detail View">
+    <ContentPage.Content>
+        <Grid Margin="40" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                <Label FontAttributes="Bold" Text="Name:"/>
+                <Label x:Name="Name"/>
+            </StackLayout>
+            <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                <Label FontAttributes="Bold" Text="PhoneNumber:"/>
+                <Label x:Name="PhoneNumber"/>
+            </StackLayout>
+            <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                <Label FontAttributes="Bold" Text="Time:"/>
+                <Label x:Name="Time"/>
+            </StackLayout>
+            <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                <Label FontAttributes="Bold" Text="Paid:"/>
+                <Label x:Name="Paid"/>
+            </StackLayout>
+            <StackLayout Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                <Label FontAttributes="Bold" Text="Service:"/>
+                <Label x:Name="service"/>
+            </StackLayout>
+            <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                <Label FontAttributes="Bold" Text="Topay:"/>
+                <Label x:Name="Topay"/>
+            </StackLayout>
+            <StackLayout Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+                <Label FontAttributes="Bold" Text="Status:"/>
+                <Label x:Name="Status"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
