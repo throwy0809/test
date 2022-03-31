@@ -24,5 +24,12 @@ namespace Server.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        public override void OnBackPressed()
+        {
+            if (App._NavigationPage.CurrentPage.Title == "Calendar Events")
+                return;
+            base.OnBackPressed();
+        }
     }
 }
